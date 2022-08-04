@@ -21,10 +21,10 @@ warnings.filterwarnings('ignore')
 pio.renderers.default = 'browser'
 
 # loading  data
-data = pd.read_csv('C:/LCF Official Website/pred.csv',
+data = pd.read_csv('C:/LCF Official Website/core/ml_notebooks/pred.csv',
                    parse_dates=['Date'], index_col='Date')
 
-model1 = load_model('C:/LCF Official Website/model2.h5')
+model1 = load_model('C:/LCF Official Website/core/ml_notebooks/model2.h5')
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
