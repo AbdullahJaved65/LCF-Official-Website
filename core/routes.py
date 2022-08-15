@@ -1,20 +1,17 @@
-import plotly.io as pio
-import plotly.express as px
-from pandas._libs import index
+import warnings
+
+import numpy as np
 import pandas as pd
+import plotly.express as px
+import plotly.io as pio
 from flask import render_template, \
     send_file, request, redirect
 from flask_mysqldb import MySQL
-
-from core import ContactForm, app
-
-import pandas as pd
-import numpy as np
 # import matplotlib.pyplot as plt
 # from matplotlib import pyplot
 from keras.models import load_model
-from numpy import array
-import warnings
+
+from core import ContactForm, app
 
 warnings.filterwarnings('ignore')
 # from plotly import Figure
