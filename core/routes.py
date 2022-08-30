@@ -3,12 +3,18 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.io as pio
+import matplotlib.pyplot as plt
+import chart_studio
+from chart_studio import tools as tls
+import chart_studio.plotly as py
 from flask import render_template, \
     send_file, request, redirect
 from flask_mysqldb import MySQL
 # import matplotlib.pyplot as plt
 # from matplotlib import pyplot
 from keras.models import load_model
+from dash import Dash, html, Input, Output, callback, no_update
+from base64 import b64encode
 
 from core import ContactForm, app
 
@@ -28,6 +34,10 @@ app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'lcf_database'
 
 mysql = MySQL(app)
+
+username = "abdullahjaved65"
+api_key = "YYmQ4ilIrDcNVOvuIBEm"
+tls.tools.set_credentials_file(username=username, api_key=api_key)
 
 
 @app.route('/', methods=("POST", "GET"))
@@ -100,14 +110,18 @@ def plot_png(data):
     pio.renderers = 'firefox'
     fig = px.line(df, y='waterlevel',   width=1920, height=1080,
                   title='Predicted Groundwater level of Kuchlak for the year 2021', labels=dict(index="Date"))
+    
     fig.update_xaxes(rangeslider_visible=True)
+    # fig.write_html("C:/LCF Official Website/file.html")
     return pio.show(fig)
     # data.plot()
-
-
+   
 batch_size = 12
 df = create_figure(model1, batch_size, data)
-df.plot()
+graph_var = plot_png(df)
+py.plot(graph_var, filename='groundwater level', auto_open=True)
+# plt.savefig('fig.png')
+
 
 
 @app.route('/about.html')
