@@ -1,17 +1,14 @@
 import warnings
-import numpy as np
+
 import pandas as pd
-import plotly.express as px
 import plotly.io as pio
 from flask import render_template, \
     send_file, request, redirect
 from flask_mysqldb import MySQL
-import matplotlib.pyplot as plt
-from matplotlib import pyplot
-from matplotlib.pyplot import savefig
-# from keras.models import load_model
 
 from core import ContactForm, app
+
+# from keras.models import load_model
 
 warnings.filterwarnings('ignore')
 # from plotly import Figure
@@ -34,7 +31,6 @@ mysql = MySQL(app)
 @app.route('/', methods=("POST", "GET"))
 def home():
     form = ContactForm()
-
     # result = {}
     # result['name'] = request.form["name"]
     # result['email'] = request.form["email"]
@@ -48,69 +44,13 @@ def home():
         email = request.form["email"]
         message = request.form["message"]
         res = pd.DataFrame({'name': name, 'email': email,
-                           'message': message}, index=[0])
+                            'message': message}, index=[0])
         res.to_csv('./contactusMessage.csv')
         return redirect("/")
     else:
         return render_template("index.html", form=form, dict=dict)
 
 
-# @app.route('/plot.png')
-# def create_figure(model, batch_size, data):
-#     test_predictions = []
-#     X = data.tail(12)
-#     Y = X.to_numpy()
-#     Y = Y.reshape(1, len(X), 1)
-#     for i in range(batch_size):
-#         # get the prediction value for the first batch
-#         current_pred = model1.predict(Y)[0]
-#         # append the prediction into the array
-#         test_predictions.append(current_pred)
-#         # use the prediction to update the batch and remove the first value
-#         Y = np.append(Y[:, 1:, :], [[current_pred]], axis=1)
-
-#         def inner_func(X):
-#             new = X
-#             new = pd.Index(pd.date_range(
-#                 start=X.index[-1], periods=batch_size, freq="M")).strftime('%Y-%m')
-#             new.index = pd.to_datetime(new)
-#             return new
-
-#     df1 = pd.DataFrame(test_predictions,
-#                        index=inner_func(X),
-#                        columns=['waterlevel'])
-#     # dict =  {
-#     #         '2020-12':  1563.970215,
-#     #         '2021-01':  1563.332886,
-#     #         '2021-02':  1562.796753,
-#     #         '2021-03':  1562.158813,
-#     #         '2021-04':  1561.437256,
-#     #         '2021-05':  1560.755127,
-#     #         '2021-06':  1560.239258,
-#     #         '2021-07':  1559.708862,
-#     #         '2021-08':  1559.225464,
-#     #         '2021-09':  1558.695923,
-#     #         '2021-10':  1558.057007,
-#     #         '2021-11':  1557.595093
-#     # }
-#     # print(dict)
-#     return df1
-    
-
-# def plot_png(data):
-#     # pio.renderers = 'firefox'
-#     # fig = px.line(df, y='waterlevel',   width=1920, height=1080,
-#     #               title='Predicted Groundwater level of Kuchlak for the year 2021', labels=dict(index="Date"))
-#     # fig.update_xaxes(rangeslider_visible=True)
-#     # return pio.show(fig)
-#     # data.plot()
-#     batch_size = 12
-#     df = create_figure(model1, batch_size, data)
-#     plt.plot("Date", "waterlevel", data=df)
-#     plt.savefig("C/LCF Official Website/static/images/plot.png")
-    
-    
-    
 @app.route('/about.html')
 def about():
     return render_template('about.html')
@@ -124,18 +64,9 @@ def contact():
         email = request.form["email"]
         message = request.form["message"]
         res = pd.DataFrame({'name': name, 'email': email,
-                           'message': message}, index=[0])
+                            'message': message}, index=[0])
         res.to_csv('./contactusMessage.csv')
 
-        # cur = mysql.connection.cursor()
-        # cur.execute("INSERT INTO user(name) VALUES(%s)",
-        #             ["Ahsan"])
-        #
-        # # commit to db
-        # mysql.connection.commit()
-        #
-        # # close connection
-        # cur.close()
         return redirect("contact.html")
     else:
         return render_template('contact.html', form=form)
@@ -144,8 +75,6 @@ def contact():
 @app.route('/event.html')
 def event():
     return render_template('event.html')
-    # news_articles = get_latest_news()
-    # return render_template('event.html', news_articles=news_articles)
 
 
 @app.route('/gallery.html')
