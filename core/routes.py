@@ -9,7 +9,7 @@ from flask_mysqldb import MySQL
 import matplotlib.pyplot as plt
 from matplotlib import pyplot
 from matplotlib.pyplot import savefig
-from keras.models import load_model
+# from keras.models import load_model
 
 from core import ContactForm, app
 
@@ -18,10 +18,10 @@ warnings.filterwarnings('ignore')
 pio.renderers.default = 'browser'
 
 # loading  data
-data = pd.read_csv('C:/LCF Official Website/core/ml_notebooks/pred.csv',
-                   parse_dates=['Date'], index_col='Date')
+# data = pd.read_csv('C:/LCF Official Website/core/ml_notebooks/pred.csv',
+#                    parse_dates=['Date'], index_col='Date')
 
-model1 = load_model('C:/LCF Official Website/core/ml_notebooks/model2.h5')
+# model1 = load_model('C:/LCF Official Website/core/ml_notebooks/model2.h5')
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
