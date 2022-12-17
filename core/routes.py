@@ -94,7 +94,7 @@ def upload_form():
 
 @app.route('/download')
 def download_file():
-    path = "html2pdf.pdf"
+    """html2pdf.pdf"""
     # path = "info.xlsx"
     # path = "simple.docx"
     # path = "sample.txt"
